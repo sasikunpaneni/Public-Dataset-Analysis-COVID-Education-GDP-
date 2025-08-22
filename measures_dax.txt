@@ -1,0 +1,17 @@
+
+-- Totals
+Total Cases = SUM('master_facts'[new_cases_year])
+Total Deaths = SUM('master_facts'[new_deaths_year])
+
+-- Per 100k
+Cases per 100k = DIVIDE(SUM('master_facts'[new_cases_year]), SUM('master_facts'[population])) * 100000
+Deaths per 100k = DIVIDE(SUM('master_facts'[new_deaths_year]), SUM('master_facts'[population])) * 100000
+
+-- Monthly cases (assumes covid_by_continent_month in model joined to Date by Month)
+Monthly Cases = SUM('covid_by_continent_month'[new_cases])
+Monthly Cases 3M Avg = AVERAGEX(
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -3, MONTH),
+    [Monthly Cases]
+)
+
+Selected Year = SELECTEDVALUE('Date'[Year])
