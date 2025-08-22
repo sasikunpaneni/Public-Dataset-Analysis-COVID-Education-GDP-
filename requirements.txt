@@ -1,0 +1,5 @@
+pandas
+numpy
+matplotlib
+scipy
+prophet  # optional; if install issues on Windows, try: pip install --upgrade pip setuptools wheel; then pip install prophet
